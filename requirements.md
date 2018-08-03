@@ -1,10 +1,10 @@
 # Code Fellows .NET-401d4 Final Project Group 2 
 
-# ToDoBoT Software Requirements 
+# ScheduleBot Software Requirements 
 
 ## Vision 
 
-TDBT uses Azure Bot Services to provide a natural language interface for a planning application. TDBT will allow users to quickly and easily manage their schedules and set reminders for themselves. Our vision is to make navigating our oftentimes hectic everyday lives as painless as possible. 
+ScheduleBot uses Azure Bot Services to provide a natural language interface for a planning application. ScheduleBot will allow users to quickly and easily manage their schedules and set reminders for themselves. Our vision is to make navigating our oftentimes hectic everyday lives as painless as possible. 
 
 ##Scope (In/Out)
 
@@ -22,7 +22,7 @@ TDBT uses Azure Bot Services to provide a natural language interface for a plann
 
 ###Out 
 
-1. The bot cannot tell the future 
+1. The bot will not respond to languages other than English.
 
 ##Minimum Viable Product 
 
