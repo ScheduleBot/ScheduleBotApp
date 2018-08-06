@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using _401Final.Data;
+using Final401.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Final401.Models.Interfaces;
+using Final401.Models;
 
-namespace _401Final
+namespace Final401
 {
     public class Startup
     {
@@ -39,8 +41,13 @@ namespace _401Final
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDbContext<ScheduleDBContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<ISchedule, DevSchedule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
