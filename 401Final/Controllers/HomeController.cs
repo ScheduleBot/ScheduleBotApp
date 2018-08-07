@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using _401Final.Models;
+using Final401.Models;
 
-namespace _401Final.Controllers
+namespace Final401.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace _401Final.Models
+namespace Final401.Models
 {
     public class ErrorViewModel
     {
