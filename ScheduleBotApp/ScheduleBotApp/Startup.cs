@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using _401Final.Data;
+using ScheduleBotApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace _401Final
+namespace ScheduleBotApp
 {
     public class Startup
     {
@@ -41,6 +41,15 @@ namespace _401Final
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthentication()
+            //.AddMicrosoftAccount(microsoftOptions => { ... })
+        .AddGoogle(googleOptions =>
+        {
+            googleOptions.ClientId = Configuration["Authorization:Google:ClientId"];
+            googleOptions.ClientSecret = Configuration["Authorization:Google:ClientSecret"];
+        });
+    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
