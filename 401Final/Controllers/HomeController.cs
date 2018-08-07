@@ -17,7 +17,7 @@ namespace Final401.Controllers
 
         public IActionResult RecentActivity()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Bot 202's recent activity.";
 
             return View();
         }
