@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Final401.Controllers
 {
-    [Route("/API/Schedule")]
+    [Route("API/Schedule")]
     public class ScheduleController : Controller
     {
         private readonly ISchedule _context;
@@ -18,7 +18,8 @@ namespace Final401.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(Name = "GetSchedule")]
+        [Route("Get/{id}")]
         public ActionResult<Schedule> Get(int id)
         {
             var schedule = _context.GetScheduleByID(id);
@@ -26,7 +27,8 @@ namespace Final401.Controllers
             else return schedule;
         }
 
-        [HttpGet("{userID}")]
+        [HttpGet]
+        [Route("GetAll/{userID}")]
         public ActionResult<List<Schedule>> GetAll(string userID)
         {
             try
@@ -40,17 +42,19 @@ namespace Final401.Controllers
         }
 
         [HttpPost]
+        [Route("New")]
         public IActionResult New([FromBody]Schedule schedule)
         {
             if (ModelState.IsValid)
             {
                 _context.CreateSchedule(schedule);
-                return CreatedAtRoute("Get", new { id = schedule.ID }, schedule);
+                return CreatedAtRoute("GetSchedule", new { id = schedule.ID }, schedule);
             }
             else return BadRequest();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("Update/{id}")]
         public IActionResult Update(int id, [FromBody]Schedule schedule)
         {
             if (ModelState.IsValid)
@@ -68,7 +72,8 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             var schedule = _context.GetScheduleByID(id);
@@ -80,7 +85,8 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpDelete("{userID}")]
+        [HttpDelete]
+        [Route("DeleteAll/{userID}")]
         public IActionResult DeleteAll(string userID)
         {
             try

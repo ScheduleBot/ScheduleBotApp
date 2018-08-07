@@ -8,6 +8,7 @@ using Final401.Models;
 
 namespace Final401.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
         public IActionResult Index()

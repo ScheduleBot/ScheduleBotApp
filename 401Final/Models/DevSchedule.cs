@@ -22,50 +22,20 @@ namespace Final401.Models
         /// Adds a new schedule to the database.
         /// </summary>
         /// <param name="schedule">The schedule being added.</param>
-        public async void CreateSchedule(Schedule schedule)
+        public void CreateSchedule(Schedule schedule)
         {
-            await _context.Schedules.AddAsync(schedule);
-            await _context.SaveChangesAsync();
+             _context.Schedules.Add(schedule);
+             _context.SaveChanges();
         }
 
         /// <summary>
         /// Adds a new schedule item to the database.
         /// </summary>
         /// <param name="scheduleItem">The schedule item being added.</param>
-        public async void CreateScheduleItem(ScheduleItem scheduleItem)
+        public void CreateScheduleItem(ScheduleItem scheduleItem)
         {
-            await _context.ScheduleItems.AddAsync(scheduleItem);
-            await _context.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// Creates a duplicate of an existing schedule item.
-        /// </summary>
-        /// <param name="scheduleItem">The schedule item being duplicated</param>
-        public void CreateRepeatScheduleItem(ScheduleItem scheduleItem)
-        {
-            if ((byte)scheduleItem.Days == 0) return;
-            byte weekday;
-            DateTime time = scheduleItem.StartTime;
-            for (int i = 0; i < 7; i++)
-            {
-                time = time.AddDays(1);
-                weekday = (byte)scheduleItem.StartTime.DayOfWeek;
-                if (((byte)scheduleItem.Days & (1 << weekday)) != 0)
-                {
-                    ScheduleItem newItem = new ScheduleItem
-                    {
-                        Days = scheduleItem.Days,
-                        Description = scheduleItem.Description,
-                        Length = scheduleItem.Length,
-                        ScheduleID = scheduleItem.ID,
-                        StartTime = time,
-                        Title = scheduleItem.Title
-                    };
-                    CreateScheduleItem(newItem);
-                    break;
-                }
-            }
+             _context.ScheduleItems.Add(scheduleItem);
+             _context.SaveChanges();
         }
 
         //---------------- READ Methods ----------------//
@@ -77,9 +47,10 @@ namespace Final401.Models
         /// <returns>A list of schedule items.</returns>
         public List<ScheduleItem> GetAllScheduleItems(int scheduleId)
         {
+            if (GetScheduleByID(scheduleId) is null) throw new KeyNotFoundException();
             var items = _context.ScheduleItems.Where(x => x.ScheduleID == scheduleId);
             if (items.Any()) return items.ToList();
-            else throw new KeyNotFoundException();
+            else return null;
         }
 
         /// <summary>
@@ -89,7 +60,15 @@ namespace Final401.Models
         /// <returns>A schedule.</returns>
         public Schedule GetScheduleByID(int id)
         {
-            return _context.Schedules.Single(x => x.ID == id);
+            try
+            {
+                return _context.Schedules.Single(x => x.ID == id);
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
 
         /// <summary>
@@ -99,7 +78,14 @@ namespace Final401.Models
         /// <returns>A schedule item.</returns>
         public ScheduleItem GetScheduleItemByID(int id)
         {
-            return _context.ScheduleItems.Single(x => x.ID == id);
+            try
+            {
+                return _context.ScheduleItems.Single(x => x.ID == id);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -110,9 +96,34 @@ namespace Final401.Models
         /// <returns>A list of schedule items.</returns>
         public List<ScheduleItem> GetScheduleItemsByDay(int scheduleId, DateTime day)
         {
-            var items = GetAllScheduleItems(scheduleId).Where(x => x.StartTime.Date == day.Date);
-            if (items.Any()) return items.ToList();
-            else return null;
+            List<ScheduleItem> items = GetAllScheduleItems(scheduleId);
+            if (items is null) return null;
+            else
+            {
+                List<ScheduleItem> todaysItems = new List<ScheduleItem>();
+                foreach (ScheduleItem item in items)
+                {
+                    if (item.StartTime.Date == day.Date) todaysItems.Add(item);
+                    else if (((byte)item.Days & (1 << (int)day.DayOfWeek)) != 0)
+                    {
+                        ScheduleItem newItem = new ScheduleItem()
+                        {
+                            Length = item.Length,
+                            Description = item.Description,
+                            Title = item.Title,
+                            StartTime = new DateTime(day.Year, day.Month, day.Day,
+                                item.StartTime.Hour, item.StartTime.Minute, item.StartTime.Second)
+                        };
+                        todaysItems.Add(newItem);
+                    }
+                }
+                if (todaysItems.Any())
+                {
+                    todaysItems.Sort((item1, item2) => item1.StartTime.CompareTo(item2.StartTime));
+                    return todaysItems;
+                }
+                else return null;
+            }
         }
 
         /// <summary>
@@ -127,6 +138,11 @@ namespace Final401.Models
             else throw new KeyNotFoundException();
         }
 
+        public List<ScheduleItem> Get3DayScheduleItems(int scheduleId, DateTime startDay)
+        {
+            return GetNDayScheduleItems(3, scheduleId, startDay);
+        }
+
         /// <summary>
         /// Gets all items in a schedule in a 7-day window.
         /// </summary>
@@ -135,10 +151,7 @@ namespace Final401.Models
         /// <returns>A list of schedule items.</returns>
         public List<ScheduleItem> GetWeeklyScheduleItems(int scheduleId, DateTime startDay)
         {
-            var items = GetAllScheduleItems(scheduleId)
-                .Where(x => x.StartTime.Date >= startDay.Date && x.StartTime.Date <= startDay.AddDays(7).Date);
-            if (items.Any()) return items.ToList();
-            else return null;
+            return GetNDayScheduleItems(7, scheduleId, startDay);
         }
 
         //---------------- UPDATE Methods ----------------//
@@ -148,7 +161,7 @@ namespace Final401.Models
         /// </summary>
         /// <param name="id">The ID of the schedule.</param>
         /// <param name="schedule">The updated schedule.</param>
-        public async void UpdateSchedule(int id, Schedule schedule)
+        public void UpdateSchedule(int id, Schedule schedule)
         {
             Schedule dbSchedule = GetScheduleByID(id);
             if (dbSchedule is null) throw new KeyNotFoundException();
@@ -156,7 +169,7 @@ namespace Final401.Models
             {
                 dbSchedule.Title = schedule.Title;
                 _context.Update(dbSchedule);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
 
@@ -165,7 +178,7 @@ namespace Final401.Models
         /// </summary>
         /// <param name="id">The ID of the schedule item.</param>
         /// <param name="scheduleItem">The updated schedule item.</param>
-        public async void UpdateScheduleItem(int id, ScheduleItem scheduleItem)
+        public void UpdateScheduleItem(int id, ScheduleItem scheduleItem)
         {
             ScheduleItem dbScheduleItem = GetScheduleItemByID(id);
             if (dbScheduleItem is null) throw new KeyNotFoundException();
@@ -178,7 +191,7 @@ namespace Final401.Models
                 dbScheduleItem.StartTime = scheduleItem.StartTime;
                 dbScheduleItem.Title = scheduleItem.Title;
                 _context.Update(dbScheduleItem);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
 
@@ -188,18 +201,22 @@ namespace Final401.Models
         /// Deletes all schedule items belonging to a schedule.
         /// </summary>
         /// <param name="scheduleId">The schedule's ID.</param>
-        public async void DeleteAllItemsInSchedule(int scheduleId)
+        public void DeleteAllItemsInSchedule(int scheduleId)
         {
             List<ScheduleItem> scheduleItems = GetAllScheduleItems(scheduleId);
-            _context.ScheduleItems.RemoveRange(scheduleItems);
-            await _context.SaveChangesAsync();
+            if (scheduleItems is null) return;
+            else
+            {
+                _context.ScheduleItems.RemoveRange(scheduleItems);
+                _context.SaveChanges();
+            }
         }
 
         /// <summary>
         /// Deletes all schedules belonging to a user.
         /// </summary>
         /// <param name="user">The user's ID.</param>
-        public async void DeleteAllUserSchedules(string user)
+        public void DeleteAllUserSchedules(string user)
         {
             List<Schedule> schedules = GetUserSchedules(user);
             foreach (Schedule schedule in schedules)
@@ -207,27 +224,27 @@ namespace Final401.Models
                 DeleteAllItemsInSchedule(schedule.ID);
             }
             _context.Schedules.RemoveRange(schedules);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         /// <summary>
         /// Deletes a schedule from the database.
         /// </summary>
         /// <param name="schedule">The schedule being deleted.</param>
-        public async void DeleteSchedule(Schedule schedule)
+        public void DeleteSchedule(Schedule schedule)
         {
             _context.Schedules.Remove(schedule);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         /// <summary>
         /// Deletes a schedule item from the database.
         /// </summary>
         /// <param name="scheduleItem">The item being deleted.</param>
-        public async void DeleteScheduleItem(ScheduleItem scheduleItem)
+        public void DeleteScheduleItem(ScheduleItem scheduleItem)
         {
             _context.ScheduleItems.Remove(scheduleItem);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -242,9 +259,22 @@ namespace Final401.Models
             foreach (ScheduleItem item in items)
             {
                 endTime = item.StartTime.Add(item.Length);
-                CreateRepeatScheduleItem(item);
-                if (now > endTime) DeleteScheduleItem(item);
+                if (now > endTime && item.Days == 0) DeleteScheduleItem(item);
             }
+        }
+
+        //---------------- HELPER METHODS ----------------//
+
+        private List<ScheduleItem> GetNDayScheduleItems(int n, int scheduleId, DateTime startDay)
+        {
+            List<ScheduleItem> result = new List<ScheduleItem>(), dailyItems;
+            for (int i = 0; i < n; i++)
+            {
+                dailyItems = GetScheduleItemsByDay(scheduleId, startDay.AddDays(i));
+                if (dailyItems != null) result.AddRange(dailyItems);
+            }
+            if (result.Any()) return result;
+            else return null;
         }
     }
 }

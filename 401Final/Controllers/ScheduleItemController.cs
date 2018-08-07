@@ -18,7 +18,8 @@ namespace Final401.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(Name = "GetScheduleItem")]
+        [Route("Get/{id}")]
         public ActionResult<ScheduleItem> Get(int id)
         {
             var item = _context.GetScheduleItemByID(id);
@@ -26,7 +27,8 @@ namespace Final401.Controllers
             else return item;
         }
 
-        [HttpGet("{scheduleID}")]
+        [HttpGet]
+        [Route("GetAll/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> GetAll(int scheduleID)
         {
             try
@@ -39,7 +41,8 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpGet("{scheduleID}")]
+        [HttpGet]
+        [Route("Today/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> Today(int scheduleID)
         {
             try
@@ -52,7 +55,22 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpGet("{scheduleID}")]
+        [HttpGet]
+        [Route("ThreeDay/{scheduleID}")]
+        public ActionResult<List<ScheduleItem>> ThreeDay(int scheduleID)
+        {
+            try
+            {
+                return _context.Get3DayScheduleItems(scheduleID, DateTime.Now);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        [Route("Week/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> Week(int scheduleID)
         {
             try
@@ -66,18 +84,21 @@ namespace Final401.Controllers
         }
 
         [HttpPost]
-        public IActionResult New([FromBody] ScheduleItem scheduleItem)
+        [Route("New")]
+        public IActionResult New([FromBody]ScheduleItem scheduleItem)
         {
             if (ModelState.IsValid)
             {
                 _context.CreateScheduleItem(scheduleItem);
-                return CreatedAtRoute("Get", new { id = scheduleItem.ID }, scheduleItem);
+                return CreatedAtRoute("GetScheduleItem", new { id = scheduleItem.ID }, scheduleItem);
             }
             else return BadRequest();
+
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] ScheduleItem scheduleItem)
+        [HttpPut]
+        [Route("Update/{id}")]
+        public IActionResult Update(int id, [FromBody]ScheduleItem scheduleItem)
         {
             if (ModelState.IsValid)
             {
@@ -94,22 +115,21 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            try
+            var item = _context.GetScheduleItemByID(id);
+            if (item is null) return NotFound();
+            else
             {
-                var item = _context.GetScheduleItemByID(id);
                 _context.DeleteScheduleItem(item);
                 return NoContent();
             }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
         }
 
-        [HttpDelete("{scheduleID}")]
+        [HttpDelete]
+        [Route("DeleteAll/{scheduleID}")]
         public IActionResult DeleteAll(int scheduleID)
         {
             try
