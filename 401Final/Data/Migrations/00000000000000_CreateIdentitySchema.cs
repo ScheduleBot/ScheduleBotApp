@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ScheduleBotApp.Data.Migrations
+namespace _401Final.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

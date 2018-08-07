@@ -1,6 +1,6 @@
 using System;
 
-namespace ScheduleBotApp.Models
+namespace _401Final.Models
 {
     public class ErrorViewModel
     {

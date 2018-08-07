@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ScheduleBotApp.Data
+namespace _401Final.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
