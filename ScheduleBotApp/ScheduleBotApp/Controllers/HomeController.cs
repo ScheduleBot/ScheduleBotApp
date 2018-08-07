@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using _401Final.Models;
+using ScheduleBotApp.Models;
 
-namespace _401Final.Controllers
+namespace ScheduleBotApp.Controllers
 {
     public class HomeController : Controller
     {
@@ -15,21 +15,21 @@ namespace _401Final.Controllers
             return View();
         }
 
-        public IActionResult RecentActivity()
+        public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult ItemList()
+        public IActionResult Contact()
         {
-            ViewData["Message"] = "This will display the items the bot can read.";
+            ViewData["Message"] = "Your contact page.";
 
             return View();
         }
 
-        public IActionResult TestBot()
+        public IActionResult Privacy()
         {
             return View();
         }
