@@ -45,11 +45,12 @@ namespace Final401.Models
         public void CreateRepeatScheduleItem(ScheduleItem scheduleItem)
         {
             if ((byte)scheduleItem.Days == 0) return;
-            int weekday = (int)scheduleItem.StartTime.DayOfWeek + 1;
+            byte weekday;
             DateTime time = scheduleItem.StartTime;
             for (int i = 0; i < 7; i++)
             {
                 time = time.AddDays(1);
+                weekday = (byte)scheduleItem.StartTime.DayOfWeek;
                 if (((byte)scheduleItem.Days & (1 << weekday)) != 0)
                 {
                     ScheduleItem newItem = new ScheduleItem
@@ -64,7 +65,6 @@ namespace Final401.Models
                     CreateScheduleItem(newItem);
                     break;
                 }
-                weekday = (weekday == 6) ? 0 : weekday + 1;
             }
         }
 
@@ -77,7 +77,9 @@ namespace Final401.Models
         /// <returns>A list of schedule items.</returns>
         public List<ScheduleItem> GetAllScheduleItems(int scheduleId)
         {
-            return _context.ScheduleItems.Where(x => x.ScheduleID == scheduleId).ToList();
+            var items = _context.ScheduleItems.Where(x => x.ScheduleID == scheduleId);
+            if (items.Any()) return items.ToList();
+            else throw new KeyNotFoundException();
         }
 
         /// <summary>
@@ -108,8 +110,9 @@ namespace Final401.Models
         /// <returns>A list of schedule items.</returns>
         public List<ScheduleItem> GetScheduleItemsByDay(int scheduleId, DateTime day)
         {
-            return GetAllScheduleItems(scheduleId)
-                .Where(x => x.StartTime.Date == day.Date).ToList();
+            var items = GetAllScheduleItems(scheduleId).Where(x => x.StartTime.Date == day.Date);
+            if (items.Any()) return items.ToList();
+            else return null;
         }
 
         /// <summary>
@@ -119,7 +122,9 @@ namespace Final401.Models
         /// <returns>A list of schedules.</returns>
         public List<Schedule> GetUserSchedules(string user)
         {
-            return _context.Schedules.Where(x => x.UserID == user).ToList();
+            var schedules = _context.Schedules.Where(x => x.UserID == user);
+            if (schedules.Any()) return schedules.ToList();
+            else throw new KeyNotFoundException();
         }
 
         /// <summary>
@@ -130,8 +135,10 @@ namespace Final401.Models
         /// <returns>A list of schedule items.</returns>
         public List<ScheduleItem> GetWeeklyScheduleItems(int scheduleId, DateTime startDay)
         {
-            return GetAllScheduleItems(scheduleId)
-                .Where(x => x.StartTime.Date >= startDay.Date && x.StartTime.Date <= startDay.AddDays(7).Date).ToList();
+            var items = GetAllScheduleItems(scheduleId)
+                .Where(x => x.StartTime.Date >= startDay.Date && x.StartTime.Date <= startDay.AddDays(7).Date);
+            if (items.Any()) return items.ToList();
+            else return null;
         }
 
         //---------------- UPDATE Methods ----------------//
@@ -144,9 +151,13 @@ namespace Final401.Models
         public async void UpdateSchedule(int id, Schedule schedule)
         {
             Schedule dbSchedule = GetScheduleByID(id);
-            dbSchedule.Title = schedule.Title;
-            _context.Update(dbSchedule);
-            await _context.SaveChangesAsync();
+            if (dbSchedule is null) throw new KeyNotFoundException();
+            else
+            {
+                dbSchedule.Title = schedule.Title;
+                _context.Update(dbSchedule);
+                await _context.SaveChangesAsync();
+            }
         }
 
         /// <summary>
@@ -157,14 +168,18 @@ namespace Final401.Models
         public async void UpdateScheduleItem(int id, ScheduleItem scheduleItem)
         {
             ScheduleItem dbScheduleItem = GetScheduleItemByID(id);
-            dbScheduleItem.StartTime = scheduleItem.StartTime;
-            dbScheduleItem.Days = scheduleItem.Days;
-            dbScheduleItem.Description = scheduleItem.Description;
-            dbScheduleItem.Length = scheduleItem.Length;
-            dbScheduleItem.StartTime = scheduleItem.StartTime;
-            dbScheduleItem.Title = scheduleItem.Title;
-            _context.Update(dbScheduleItem);
-            await _context.SaveChangesAsync();
+            if (dbScheduleItem is null) throw new KeyNotFoundException();
+            else
+            {
+                dbScheduleItem.StartTime = scheduleItem.StartTime;
+                dbScheduleItem.Days = scheduleItem.Days;
+                dbScheduleItem.Description = scheduleItem.Description;
+                dbScheduleItem.Length = scheduleItem.Length;
+                dbScheduleItem.StartTime = scheduleItem.StartTime;
+                dbScheduleItem.Title = scheduleItem.Title;
+                _context.Update(dbScheduleItem);
+                await _context.SaveChangesAsync();
+            }
         }
 
         //---------------- DELETE Methods ----------------//
