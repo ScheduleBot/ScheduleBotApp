@@ -76,14 +76,14 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
-        [HttpPut]
-        public IActionResult Update(int scheduleID, [FromBody] ScheduleItem scheduleItem)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] ScheduleItem scheduleItem)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.UpdateScheduleItem(scheduleID, scheduleItem);
+                    _context.UpdateScheduleItem(id, scheduleItem);
                     return NoContent();
                 }
                 catch (KeyNotFoundException)
