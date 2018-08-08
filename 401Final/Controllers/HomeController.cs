@@ -8,6 +8,7 @@ using Final401.Models;
 
 namespace Final401.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -17,7 +18,7 @@ namespace Final401.Controllers
 
         public IActionResult RecentActivity()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Bot 202's recent activity.";
 
             return View();
         }

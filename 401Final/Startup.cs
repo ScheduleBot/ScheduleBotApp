@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Final401.Models.Interfaces;
 using Final401.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Final401
 {
@@ -40,22 +41,32 @@ namespace Final401
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddDbContext<ScheduleDBContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddAuthentication()
-                .AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = Configuration["OAUTH:Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["OAUTH:Authentication:Google:ClientSecret"];
-            });
+            //Identity not working for me
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            //services.AddAuthentication()
+            //    .AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = Configuration["OAUTH:Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = Configuration["OAUTH:Authentication:Google:ClientSecret"];
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<ISchedule, DevSchedule>();
+
+            services.AddMvcCore().AddApiExplorer();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "TODO API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +94,12 @@ namespace Final401
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TODO API V1");
             });
         }
     }

@@ -17,9 +17,9 @@ namespace Final401.Models.Interfaces
 
         // ScheduleItem Methods
         void CreateScheduleItem(ScheduleItem scheduleItem);
-        void CreateRepeatScheduleItem(ScheduleItem scheduleItem);
         List<ScheduleItem> GetAllScheduleItems(int scheduleId);
         List<ScheduleItem> GetScheduleItemsByDay(int scheduleId, DateTime day);
+        List<ScheduleItem> Get3DayScheduleItems(int scheduleId, DateTime day);
         List<ScheduleItem> GetWeeklyScheduleItems(int scheduleId, DateTime startDay);
         ScheduleItem GetScheduleItemByID(int id);
         void UpdateScheduleItem(int id, ScheduleItem scheduleItem);
