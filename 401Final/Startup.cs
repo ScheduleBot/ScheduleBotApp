@@ -37,6 +37,15 @@ namespace Final401
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("ProductionConnection")));
+
+            //services.AddDbContext<ScheduleDBContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("ProductionConnection")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
