@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Final401.Migrations
+namespace Final401.Migrations.ScheduleDB
 {
-    public partial class initial : Migration
+    public partial class nuked : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
