@@ -1,4 +1,4 @@
-﻿@model  List<Final401.Models.ScheduleItem>
+﻿@model  List<Final401.Models.ChatLog>
 
 @{
     ViewData["Title"] = "Activity";
@@ -18,12 +18,11 @@ else
     {
         <table>
             <tr>
-                <td>Name: @item.Title</td>
-                <td> Level: @item.StartTime</td>
+                <td>Event Time: @item.TimeStamp</td>
+                <td>Event Log: @item.Chat</td>
             </tr>
         </table>
     }
 }
 
-<a asp-action="RecentActivity" asp-controller="Admin" method="get">Check for updates</a>
 

@@ -13,5 +13,6 @@ namespace Final401.Data
 
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<ScheduleItem> ScheduleItems { get; set; }
+        public DbSet<ChatLog> ChatLogs { get; set; }
     }
 }
