@@ -45,9 +45,10 @@ namespace Final401
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-//Identity not working for me
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            //Identity not working for me
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             //services.AddAuthentication()
             //    .AddGoogle(googleOptions =>
