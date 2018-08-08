@@ -247,24 +247,15 @@ namespace Final401.Models
             _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Deletes all expired schedule items.
-        /// </summary>
-        /// <param name="scheduleId">The schedule being cleaned.</param>
-        public void DeleteOldScheduleItems(int scheduleId)
-        {
-            List<ScheduleItem> items = GetAllScheduleItems(scheduleId);
-            DateTime now = DateTime.Now;
-            DateTime endTime;
-            foreach (ScheduleItem item in items)
-            {
-                endTime = item.StartTime.Add(item.Length);
-                if (now > endTime && item.Days == 0) DeleteScheduleItem(item);
-            }
-        }
-
         //---------------- HELPER METHODS ----------------//
 
+        /// <summary>
+        /// Gets all items in a schedule for an arbitrary number of days.
+        /// </summary>
+        /// <param name="n">The number of days.</param>
+        /// <param name="scheduleId">The ID of the schedule.</param>
+        /// <param name="startDay">The start time of the search.</param>
+        /// <returns></returns>
         private List<ScheduleItem> GetNDayScheduleItems(int n, int scheduleId, DateTime startDay)
         {
             List<ScheduleItem> result = new List<ScheduleItem>(), dailyItems;
