@@ -40,7 +40,7 @@ namespace Final401.Controllers
         [HttpGet]
         public async Task<IActionResult> RecentActivity()
         {
-            var result = from x in _context.ScheduleItems
+            var result = from x in _context.ChatLogs
                                select x;
 
             var resultList = await result.ToListAsync();
