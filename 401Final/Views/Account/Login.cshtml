@@ -5,38 +5,64 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 
-@{ViewData["Title"] = "Login";}
 
 @{Layout = "_Layout";}
 
-<head>
 
-</head>
-
-<section class="LoginForm">
-    <form method="post" asp-controller="Account" form-action="Login">
-        <h2>Login</h2>
-
-        <div>
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" />
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div>
-            <label asp-for="Password">Password</label>
-            <input asp-for="Password" />
-            <span asp-validation-for="Password"></span>
-        </div>
-
-        <button type="submit">Login</button>
-    </form>
-    <div class="External">
-        <form asp-action="ExternalLogin" method="post">
-            <button type="submit" class="fab fa-google" name="provider"
-                    value="Google" title="Log in using your Google account"></button>
-        </form>
+<div class="middlePage">
+    <div class="page-header">
+        <h1 class="logo"> Login <small>Or sign in with a 3rd party provider</small></h1>
     </div>
-    <p>or</p>
-    <br>
-    <a asp-controller="Account" asp-action="Register">Register Here</a>
-</section>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Please Sign In</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5">
+                    @{
+                        var loginProviders1 = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                        if (loginProviders1.Count > 0)
+                        {
+                            <form asp-action="ExternalLogin" method="post">
+                                @foreach (var provider in loginProviders1)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name"
+                                            title="Log in using your @provider.DisplayName account">
+                                        @if (provider.DisplayName == "Microsoft")
+                                        {
+                                            <img src="~/images/msbtn.png" class="SMicon" title="microsoft logo" />
+                                        }
+                                        else if (provider.DisplayName == "Google")
+                                        {
+                                            <img src="~/images/googlebtn.png" class="SMicon" title="google logo" />
+                                        }
+                                        @provider.Name
+                                    </button><hr />
+                                }
+                            </form>
+                        }
+                    }
+                </div>
+                <div class="col-md-7" style="border-left:1px solid #ccc;height:160px">
+                    <form method="post" asp-controller="Account" form-action="Login">
+                        <h2 class="loginfix">Login</h2>
+
+                        <div>
+                            <label asp-for="Email">Email</label><br />
+                            <input asp-for="Email" />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div>
+                            <label asp-for="Password">Password</label><br />
+                            <input asp-for="Password" />
+                            <span asp-validation-for="Password"></span>
+                        </div>
+
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

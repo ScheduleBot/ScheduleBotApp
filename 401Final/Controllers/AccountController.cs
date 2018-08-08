@@ -72,12 +72,12 @@ namespace Final401.Controllers
                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
 
-                    if (user.Email == "anthonydgreen90@gmail.com")
+                    if (user.Email.Contains("@"))
                     {
 
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                        
-                        return RedirectToAction("ItemList", "Home");
+                        return RedirectToAction("Login", "Account");
                     }
                     
                 }
@@ -113,7 +113,7 @@ namespace Final401.Controllers
             {
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ItemList", "Home");
+                    return RedirectToAction("TestBot", "Home");
                 }
                 else
                 {
