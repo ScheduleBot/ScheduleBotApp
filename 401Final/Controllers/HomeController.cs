@@ -5,11 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Final401.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Final401.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Final401.Controllers
 {
+
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
@@ -29,9 +32,20 @@ namespace Final401.Controllers
         /// default controller action
         /// </summary>
         /// <returns>home index view</returns>
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IConfiguration Configuration;
+
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            Configuration = configuration;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         /// <summary>
