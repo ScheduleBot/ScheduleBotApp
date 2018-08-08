@@ -18,8 +18,7 @@ namespace Final401.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetSchedule")]
-        [Route("Get/{id}")]
+        [HttpGet("Get/{id}", Name = "GetSchedule")]
         public ActionResult<Schedule> Get(int id)
         {
             var schedule = _context.GetScheduleByID(id);
@@ -27,8 +26,7 @@ namespace Final401.Controllers
             else return schedule;
         }
 
-        [HttpGet]
-        [Route("GetAll/{userID}")]
+        [HttpGet("GetAll/{userID}")]
         public ActionResult<List<Schedule>> GetAll(string userID)
         {
             try
@@ -41,8 +39,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("New")]
+        [HttpPost("New")]
         public IActionResult New([FromBody]Schedule schedule)
         {
             if (ModelState.IsValid)
@@ -53,8 +50,7 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
-        [HttpPut]
-        [Route("Update/{id}")]
+        [HttpPut("Update/{id}")]
         public IActionResult Update(int id, [FromBody]Schedule schedule)
         {
             if (ModelState.IsValid)
@@ -72,8 +68,7 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
-        [HttpDelete]
-        [Route("Delete/{id}")]
+        [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             var schedule = _context.GetScheduleByID(id);
@@ -85,8 +80,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("DeleteAll/{userID}")]
+        [HttpDelete("DeleteAll/{userID}")]
         public IActionResult DeleteAll(string userID)
         {
             try

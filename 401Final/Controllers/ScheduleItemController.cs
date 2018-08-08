@@ -18,8 +18,7 @@ namespace Final401.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetScheduleItem")]
-        [Route("Get/{id}")]
+        [HttpGet("Get/{id}", Name = "GetScheduleItem")]
         public ActionResult<ScheduleItem> Get(int id)
         {
             var item = _context.GetScheduleItemByID(id);
@@ -27,8 +26,7 @@ namespace Final401.Controllers
             else return item;
         }
 
-        [HttpGet]
-        [Route("GetAll/{scheduleID}")]
+        [HttpGet("GetAll/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> GetAll(int scheduleID)
         {
             try
@@ -41,8 +39,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Today/{scheduleID}")]
+        [HttpGet("Today/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> Today(int scheduleID)
         {
             try
@@ -55,8 +52,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("ThreeDay/{scheduleID}")]
+        [HttpGet("ThreeDay/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> ThreeDay(int scheduleID)
         {
             try
@@ -69,8 +65,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Week/{scheduleID}")]
+        [HttpGet("Week/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> Week(int scheduleID)
         {
             try
@@ -83,8 +78,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("New")]
+        [HttpPost("New")]
         public IActionResult New([FromBody]ScheduleItem scheduleItem)
         {
             if (ModelState.IsValid)
@@ -96,8 +90,7 @@ namespace Final401.Controllers
 
         }
 
-        [HttpPut]
-        [Route("Update/{id}")]
+        [HttpPut("Update/{id}")]
         public IActionResult Update(int id, [FromBody]ScheduleItem scheduleItem)
         {
             if (ModelState.IsValid)
@@ -115,8 +108,7 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
-        [HttpDelete]
-        [Route("Delete/{id}")]
+        [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             var item = _context.GetScheduleItemByID(id);
@@ -128,8 +120,7 @@ namespace Final401.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("DeleteAll/{scheduleID}")]
+        [HttpDelete("DeleteAll/{scheduleID}")]
         public IActionResult DeleteAll(int scheduleID)
         {
             try

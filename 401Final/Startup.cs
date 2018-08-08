@@ -58,6 +58,8 @@ namespace Final401
 
             services.AddScoped<ISchedule, DevSchedule>();
 
+            services.AddMvcCore().AddApiExplorer();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "TODO API", Version = "v1" });
