@@ -16,18 +16,8 @@ namespace Final401.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
-        //injecting schedule DbContext
-        private ScheduleDBContext _context;
-
-        /// <summary>
-        /// homecontroller contstructor setting ScheduleDbContext
-        /// </summary>
-        /// <param name="context">ScheduleDbContext</param>
-        public HomeController(ScheduleDBContext context)
-        {
-            _context = context;
-        }
-        
+       
+     
         /// <summary>
         /// default controller action
         /// </summary>
@@ -35,9 +25,11 @@ namespace Final401.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration Configuration;
+        private ScheduleDBContext _context;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, ScheduleDBContext context)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             Configuration = configuration;
