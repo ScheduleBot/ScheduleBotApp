@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Final401.Models.Interfaces;
 using Final401.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Final401
 {
@@ -40,8 +41,11 @@ namespace Final401
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+
             services.AddDbContext<ScheduleDBContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -51,6 +55,11 @@ namespace Final401
             {
                 googleOptions.ClientId = Configuration["OAUTH:Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = Configuration["OAUTH:Authentication:Google:ClientSecret"];
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -84,6 +93,7 @@ namespace Final401
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

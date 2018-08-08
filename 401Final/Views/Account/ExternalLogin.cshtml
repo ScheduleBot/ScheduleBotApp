@@ -1,0 +1,34 @@
+﻿@model Final401.Models.ExternalLoginViewModel
+
+@{ Layout = "_Layout";}
+
+<head>
+
+</head>
+
+
+<section class="LoginForm">
+    <form method="post" asp-action="ExternalLoginConfirmation">
+        <h2>Register</h2>
+        <div>
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" />
+        </div>
+
+        <div>
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div>
+            <label asp-for="ConfirmPassword">Confirm Password</label>
+            <input asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>       
+        <button type="submit">Register</button>
+    </form>
+    <p>or </p>
+    <br /> 
+    <a asp-controller="Account" asp-action="Login">Login</a>
+</section>
