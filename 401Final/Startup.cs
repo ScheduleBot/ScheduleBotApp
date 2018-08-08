@@ -9,11 +9,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using _401Final.Data;
+using Final401.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Final401.Models.Interfaces;
+using Final401.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace _401Final
+namespace Final401
 {
     public class Startup
     {
@@ -37,10 +40,31 @@ namespace _401Final
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+
+            services.AddDbContext<ScheduleDBContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddAuthentication()
+                .AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["OAUTH:Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["OAUTH:Authentication:Google:ClientSecret"];
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<ISchedule, DevSchedule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +93,7 @@ namespace _401Final
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

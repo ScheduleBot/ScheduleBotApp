@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims;
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -34,7 +40,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="RecentActivity">RecentActivity</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="ItemList">ItemList</a></li>
                 </ul>
-                <partial name="_LoginPartial" />
+                @*<partial name="_LoginPartial" />*@
             </div>
         </div>
     </nav>
@@ -42,6 +48,18 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+        <div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+            <p>@UserManager.GetUserName(User): </p>
+                <a class="nav-link" asp-controller="Account" asp-action="Logout">Log Out</a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login">Log In</a>
+            }
+
+        </div>
         @RenderBody()
         <hr />
         <footer>

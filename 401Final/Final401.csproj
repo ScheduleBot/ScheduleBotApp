@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-_401Final-7362BA9E-531A-45A1-B5F0-04D21BF3B42B</UserSecretsId>
+    <RootNamespace>Final401</RootNamespace>
+    <AssemblyName>Final401</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
