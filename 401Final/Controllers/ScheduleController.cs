@@ -18,6 +18,13 @@ namespace Final401.Controllers
             _context = context;
         }
 
+        //---------------- READ Methods ----------------//
+
+        /// <summary>
+        /// Gets a schedule by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the schedule.</param>
+        /// <returns>A schedule.</returns>
         [HttpGet("Get/{id}", Name = "GetSchedule")]
         public ActionResult<Schedule> Get(int id)
         {
@@ -26,6 +33,11 @@ namespace Final401.Controllers
             else return schedule;
         }
 
+        /// <summary>
+        /// Gets all of a user's schedules.
+        /// </summary>
+        /// <param name="userID">The user's ID.</param>
+        /// <returns>A list of schedules.</returns>
         [HttpGet("GetAll/{userID}")]
         public ActionResult<List<Schedule>> GetAll(string userID)
         {
@@ -39,6 +51,13 @@ namespace Final401.Controllers
             }
         }
 
+        //---------------- CREATE Methods ----------------//
+
+        /// <summary>
+        /// Adds a new schedule to the database.
+        /// </summary>
+        /// <param name="schedule">The schedule being added.</param>
+        /// <returns>An action result.</returns>
         [HttpPost("New")]
         public IActionResult New([FromBody]Schedule schedule)
         {
@@ -50,6 +69,14 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
+        //---------------- UPDATE Methods ----------------//
+
+        /// <summary>
+        /// Updates an existing schedule in the database.
+        /// </summary>
+        /// <param name="id">The ID of the existing schedule.</param>
+        /// <param name="schedule">The updated schedule.</param>
+        /// <returns>An action result.</returns>
         [HttpPut("Update/{id}")]
         public IActionResult Update(int id, [FromBody]Schedule schedule)
         {
@@ -68,6 +95,13 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
+        //---------------- DELETE Methods ----------------//
+
+        /// <summary>
+        /// Removes a schedule from the database.
+        /// </summary>
+        /// <param name="id">The ID of the schedule.</param>
+        /// <returns>An action result.</returns>
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
@@ -80,6 +114,11 @@ namespace Final401.Controllers
             }
         }
 
+        /// <summary>
+        /// Removes all of a user's schedules from the database.
+        /// </summary>
+        /// <param name="userID">The ID of the user.</param>
+        /// <returns>An action result.</returns>
         [HttpDelete("DeleteAll/{userID}")]
         public IActionResult DeleteAll(string userID)
         {

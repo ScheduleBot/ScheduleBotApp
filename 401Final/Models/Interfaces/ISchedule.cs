@@ -25,6 +25,5 @@ namespace Final401.Models.Interfaces
         void UpdateScheduleItem(int id, ScheduleItem scheduleItem);
         void DeleteScheduleItem(ScheduleItem scheduleItem);
         void DeleteAllItemsInSchedule(int scheduleId);
-        void DeleteOldScheduleItems(int scheduleId);
     }
 }
