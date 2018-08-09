@@ -74,3 +74,21 @@ body {
     background: linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
     font-family: 'Raleway', sans-serif;
 }
+.table {
+    width: 85%;
+}
+.table-fix {
+    width: 10px;
+}
+.tablesmall {
+    width:100px;
+}
+.tablemedium {
+    width:25px;
+}
+table{
+    margin: auto;
+}
+delete{
+    width:15px;
+}
