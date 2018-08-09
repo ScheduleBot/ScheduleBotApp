@@ -1,4 +1,4 @@
-﻿@import'_themes';
+﻿@import '_themes';
 
 header {
     background-color: $Gray;
@@ -53,4 +53,8 @@ header {
             }
         }
     }
+}
+
+body{
+    background: $Background;
 }

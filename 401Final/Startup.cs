@@ -40,26 +40,26 @@ namespace Final401
             });
 
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("ProductionConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("ProductionConnection")));
 
-            services.AddDbContext<ScheduleDBContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("ProductionConnection")));
+            //services.AddDbContext<ScheduleDBContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("ProductionConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDbContext<ScheduleDBContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ScheduleDBContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
 
             //services.AddAuthentication()
