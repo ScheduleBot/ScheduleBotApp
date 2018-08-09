@@ -50,11 +50,11 @@ namespace Final401
 
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
-            Configuration.GetConnectionString("SecondConnection")));
+            Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ScheduleDBContext>(options =>
             options.UseSqlServer(
-            Configuration.GetConnectionString("SecondConnection")));
+            Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

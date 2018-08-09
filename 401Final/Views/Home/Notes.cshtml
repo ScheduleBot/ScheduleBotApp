@@ -1,5 +1,7 @@
 ﻿@model List<Final401.Models.ScheduleItem>
 
+@{Layout = "_Layout";}
+
 <h2>@ViewData["Title"]</h2>
 
 
@@ -14,7 +16,8 @@
                 Content
             </th>
         </tr>
-        @foreach(ScheduleItem k in Model){
+        @foreach (ScheduleItem k in Model)
+        {
 
         }
     </thead>
