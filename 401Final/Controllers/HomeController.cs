@@ -67,6 +67,15 @@ namespace Final401.Controllers
             return View(items);
         }
 
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            ScheduleItem item = _context.ScheduleItems.FirstOrDefault(x => x.ID == id);
+            _context.ScheduleItems.Remove(item);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Notes");
+
+        }
+
         /// <summary>
         /// method to take user to TestBot view
         /// </summary>
