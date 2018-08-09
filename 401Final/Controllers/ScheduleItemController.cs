@@ -18,6 +18,13 @@ namespace Final401.Controllers
             _context = context;
         }
 
+        //---------------- READ Methods ----------------//
+
+        /// <summary>
+        /// Gets a schedule item by its ID.
+        /// </summary>
+        /// <param name="id">The ID being searched for.</param>
+        /// <returns>A schedule item.</returns>
         [HttpGet("Get/{id}", Name = "GetScheduleItem")]
         public ActionResult<ScheduleItem> Get(int id)
         {
@@ -26,6 +33,11 @@ namespace Final401.Controllers
             else return item;
         }
 
+        /// <summary>
+        /// Gets all items in a schedule.
+        /// </summary>
+        /// <param name="scheduleID">The ID of the schedule.</param>
+        /// <returns>A list of schedule items.</returns>
         [HttpGet("GetAll/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> GetAll(int scheduleID)
         {
@@ -39,6 +51,11 @@ namespace Final401.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets all of the items in a schedule for today.
+        /// </summary>
+        /// <param name="scheduleID">The ID of the schedule.</param>
+        /// <returns>A list of schedule items.</returns>
         [HttpGet("Today/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> Today(int scheduleID)
         {
@@ -52,6 +69,11 @@ namespace Final401.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets all of the items in a schedule for the next three days.
+        /// </summary>
+        /// <param name="scheduleID">The ID of the schedule.</param>
+        /// <returns>A list of schedule items.</returns>
         [HttpGet("ThreeDay/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> ThreeDay(int scheduleID)
         {
@@ -65,6 +87,11 @@ namespace Final401.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets all of the items in a schedule for the next week.
+        /// </summary>
+        /// <param name="scheduleID">The ID of the schedule.</param>
+        /// <returns>A list of schedule items.</returns>
         [HttpGet("Week/{scheduleID}")]
         public ActionResult<List<ScheduleItem>> Week(int scheduleID)
         {
@@ -78,6 +105,13 @@ namespace Final401.Controllers
             }
         }
 
+        //---------------- CREATE Methods ----------------//
+
+        /// <summary>
+        /// Adds a new schedule item to the database.
+        /// </summary>
+        /// <param name="scheduleItem">The schedule item being added.</param>
+        /// <returns>An action result.</returns>
         [HttpPost("New")]
         public IActionResult New([FromBody]ScheduleItem scheduleItem)
         {
@@ -90,6 +124,14 @@ namespace Final401.Controllers
 
         }
 
+        //---------------- UPDATE Methods ----------------//
+
+        /// <summary>
+        /// Updates an existing schedule item in the database.
+        /// </summary>
+        /// <param name="id">The ID of the existing schedule item.</param>
+        /// <param name="scheduleItem">The updated schedule item.</param>
+        /// <returns>An action result.</returns>
         [HttpPut("Update/{id}")]
         public IActionResult Update(int id, [FromBody]ScheduleItem scheduleItem)
         {
@@ -108,6 +150,13 @@ namespace Final401.Controllers
             else return BadRequest();
         }
 
+        //---------------- DELETE Methods ----------------//
+
+        /// <summary>
+        /// Removes a schedule item from the database.
+        /// </summary>
+        /// <param name="id">The ID of the schedule item.</param>
+        /// <returns>An action result.</returns>
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
@@ -120,6 +169,11 @@ namespace Final401.Controllers
             }
         }
 
+        /// <summary>
+        /// Removes all items in a schedule from the database.
+        /// </summary>
+        /// <param name="scheduleID">The ID of the schedule.</param>
+        /// <returns></returns>
         [HttpDelete("DeleteAll/{scheduleID}")]
         public IActionResult DeleteAll(int scheduleID)
         {

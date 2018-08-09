@@ -5,24 +5,65 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Final401.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Final401.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Final401.Controllers
 {
+
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+       
+     
+        /// <summary>
+        /// default controller action
+        /// </summary>
+        /// <returns>home index view</returns>
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IConfiguration Configuration;
+        private ScheduleDBContext _context;
+
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, ScheduleDBContext context)
         {
-            return View();
+            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            Configuration = configuration;
         }
 
-        public IActionResult RecentActivity()
+        public IActionResult Index()
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        /// <summary>
+        /// method to retrieve list of bot recent activity
+        /// </summary>
+        /// <returns>first 20 entries from ChatLog table in Schedule database</returns>
+        public async Task<IActionResult> RecentActivity()
         {
             ViewData["Message"] = "Bot 202's recent activity.";
 
-            return View();
+            var result = from x in _context.ChatLogs.Take(20)
+                         orderby x.TimeStamp descending
+                         select x;
+
+            if (result == null)
+            {
+                return RedirectToAction("RecentActivity", "Home");
+            }
+
+            return View(await result.ToListAsync());
         }
 
+        /// <summary>
+        /// this doesn't currently do anything. Do we really need it?
+        /// </summary>
+        /// <returns>View ith ViewData</returns>
         public IActionResult ItemList()
         {
             ViewData["Message"] = "This will display the items the bot can read.";
@@ -30,6 +71,10 @@ namespace Final401.Controllers
             return View();
         }
 
+        /// <summary>
+        /// method to take user to TestBot view
+        /// </summary>
+        /// <returns>view</returns>
         public IActionResult TestBot()
         {
             return View();
