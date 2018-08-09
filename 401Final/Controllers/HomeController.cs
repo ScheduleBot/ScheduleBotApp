@@ -12,10 +12,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Final401.Controllers
 {
-        /// <summary>
-        /// default controller action
-        /// </summary>
-        /// <returns>home index view</returns>
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
@@ -23,7 +19,11 @@ namespace Final401.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration Configuration;
         private ScheduleDBContext _context;
-
+        
+        /// <summary>
+        /// default controller action
+        /// </summary>
+        /// <returns>home index view</returns>
         public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, ScheduleDBContext context)
         {
             _context = context;
