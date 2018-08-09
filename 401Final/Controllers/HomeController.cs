@@ -12,16 +12,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Final401.Controllers
 {
-
-    [ApiExplorerSettings(IgnoreApi = true)]
-    public class HomeController : Controller
-    {
-       
-     
         /// <summary>
         /// default controller action
         /// </summary>
         /// <returns>home index view</returns>
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public class HomeController : Controller
+    {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration Configuration;
@@ -33,6 +30,7 @@ namespace Final401.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             Configuration = configuration;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -52,11 +50,6 @@ namespace Final401.Controllers
                          orderby x.TimeStamp descending
                          select x;
 
-            if (result == null)
-            {
-                return RedirectToAction("RecentActivity", "Home");
-            }
-
             return View(await result.ToListAsync());
         }
 
@@ -64,11 +57,14 @@ namespace Final401.Controllers
         /// this doesn't currently do anything. Do we really need it?
         /// </summary>
         /// <returns>View ith ViewData</returns>
-        public IActionResult ItemList()
+        public IActionResult Notes()
         {
-            ViewData["Message"] = "This will display the items the bot can read.";
 
-            return View();
+            List<ScheduleItem> items = _context.ScheduleItems.Where(x => x.ScheduleID == 1).ToList();
+
+            ViewData["Message"] = "This will display the Notes for the specified class.";
+
+            return View(items);
         }
 
         /// <summary>
