@@ -42,11 +42,11 @@ namespace Final401
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("ProductionConnection")));
+                    Configuration.GetConnectionString("SecondConnection")));
 
             services.AddDbContext<ScheduleDBContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("ProductionConnection")));
+                    Configuration.GetConnectionString("SecondConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
