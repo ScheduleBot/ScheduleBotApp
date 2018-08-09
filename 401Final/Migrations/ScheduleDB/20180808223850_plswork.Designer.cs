@@ -4,35 +4,22 @@ using Final401.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Final401.Migrations.ScheduleDB
 {
     [DbContext(typeof(ScheduleDBContext))]
-    partial class ScheduleDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180808223850_plswork")]
+    partial class plswork
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Final401.Models.ChatLog", b =>
-                {
-                    b.Property<int?>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Chat");
-
-                    b.Property<DateTime>("TimeStamp");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ChatLogs");
-                });
 
             modelBuilder.Entity("Final401.Models.Schedule", b =>
                 {
