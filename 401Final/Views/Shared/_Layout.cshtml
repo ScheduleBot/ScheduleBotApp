@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BotScheduler</title>
 
-    <environment include="Development">
+    @*<environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="~/css/site.css" />
     </environment>
@@ -20,36 +20,37 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" type="text/css" href="~/css/site.css" asp-append-version="true" />
-    </environment>
+    </environment>*@
+    <link href="~/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/header.css" type="text/css" rel="stylesheet" />
+
 </head>
 <body id="loginView">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Sassy Schedule Bot</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="TestBot">TestBot</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="RecentActivity">RecentActivity</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Notes">Class Notes</a></li>
-                </ul>
-            </div>
+    <header>
+        <div>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Sassy Schedule Bot</a>
         </div>
-    </nav>
+        <nav>
+            <ul>
+                <li><a asp-area="" asp-controller="Home" asp-action="TestBot">TestBot</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="RecentActivity">RecentActivity</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="ItemList">ItemList</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
         @RenderBody()
-        <hr />
-            <p id="foot">&copy; 2018 - Atay, Green, Hintzke, & Taylor</p>
-        
+    </main>    
 
-    <environment include="Development">
+    <footer>
+        <hr />
+        <p id="foot">&copy; 2018 - Atay, Green, Hintzke, & Taylor</p>
+    </footer>
+   
+
+
+    @*<environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
@@ -68,7 +69,7 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+    </environment>*@
 
     @RenderSection("Scripts", required: false)
 </body>
