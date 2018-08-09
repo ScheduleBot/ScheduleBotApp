@@ -1,13 +1,7 @@
 ﻿using Final401.Data;
 using Final401.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Final401.Controllers
 {
@@ -41,8 +35,11 @@ namespace Final401.Controllers
             {
                 ChatLog newLog = new ChatLog();
 
+                DateTime TimeStamp = DateTime.Now;
+               // TimeStamp = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(TimeStamp, "Pacific Standard Time");
                 newLog.ID = chatLog.ID;
-                newLog.TimeStamp = DateTime.Now;
+                //newLog.TimeStamp = DateTime.Now;
+                newLog.TimeStamp = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(TimeStamp, "Pacific Standard Time");
                 newLog.Chat = savedString;
 
                 _context.ChatLogs.Add(newLog);
