@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Final401.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
 
 namespace Final401.Controllers
 {
@@ -74,6 +75,22 @@ namespace Final401.Controllers
         public IActionResult TestBot()
         {
             return View();
+        }
+
+        /// <summary>
+        /// method to route user to AddNote View
+        /// </summary>
+        /// <returns>view</returns>
+        public IActionResult AddNote()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> AddNewNote(ScheduleItem scheduleItem)
+        {
+            await _context.ScheduleItems.AddAsync(scheduleItem);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Notes");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
