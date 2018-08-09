@@ -19,8 +19,19 @@ $Background: linear-gradient(90deg, #16222A 10%, #3A6073 90%);
 
 body{
     background: $Background;
+    height: 100vh;
+    text-align: center;
+}
+
+main{
+    margin-top: 2em;
+    text-align: center;
 }
 
 a{
     text-decoration: none;
+}
+
+footer{
+    margin-top: 5em;
 }
