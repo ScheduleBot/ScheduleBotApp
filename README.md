@@ -26,7 +26,7 @@ The front-end site for this app is designed to be used by administrators. The bo
 
 ## How to Use: Bot Chat Page
 
-![Test Chat Page](./Assets/TestBotPage.jpg)
+![Test Chat Page](./Assets/WebChat.PNG)
 
 The bot testing page features an embedded web chat iframe window. This allows the user to type into it directly. The list of available commands and embed links are on the page as well. Here, the user can test out the current bot functionality, then use one of the buttons to add it to a Skype or Webchat channel. There are more options available, the bot is currently registered at those two.
 
