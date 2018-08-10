@@ -20,7 +20,7 @@ The front-end Admin site is located at the url: https://schedulingbot.azurewebsi
 
 ## How to Use: Landing Page
 
-![Landing Page](./Assets/LandingPage.jpg)
+![Landing Page](./Assets/LogIn.PNG)
 
 The front-end site for this app is designed to be used by administrators. The bot itself is deployed separately, but from the admin site CRUD functionality has been enabled in notes, and the bot chat commands can be tested, as well as options to embed the bot in different sites it is registered for. When a user arrives at the site, they are immediately redirected to the login page. Right now anyone who registers is granted admin access, the goal for the future is to implement policy restrictions so that only admins are allowed access to the site, and must register via OAUTH. The landing page is to login, or choose another option in the nav bar.
 
@@ -32,13 +32,13 @@ The bot testing page features an embedded web chat iframe window. This allows th
 
 ## How to Use: Recent Activity Page
 
-![Recent Activity Page](./Assets/RecentActivityPage.jpg)
+![Recent Activity Page](./Assets/RecentActivity.PNG)
 
 The recent activity page displays the latest interactions of the bot. When a message is sent from slack with the bot mentioned, it sends a post to our site internal API. This tracks the UTC date-time stamp and the message that was sent, and stores it in the database. UTC is used as the time due to geographic locations of where the bot could be embedded. For an admin, this information is most useful using Universal Time, which allows all the interactions to be filtered by when they occured, regardless of geographical location.
 
 ## How to Use: Notes Page
 
-![Notes Page](./Assets/ViewNotePage.jpg)
+![Notes Page](./Assets/Notes.PNG)
 
 ![Write a note](./Assets/AddNewNote.jpg)
 
