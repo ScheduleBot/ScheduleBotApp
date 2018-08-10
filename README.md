@@ -57,3 +57,6 @@ Available commands(web chat):
 @schedule note day: gets the note from our internal API
 @schedule note week: gets a week of notes from our internal API
 
+## Licensing
+
+This project is licensed and available via MIT license.
