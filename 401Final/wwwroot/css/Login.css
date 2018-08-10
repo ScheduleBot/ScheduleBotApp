@@ -1,9 +1,11 @@
 ﻿* {
   box-sizing: border-box; }
 
-body {
+html {
   background: linear-gradient(90deg, #16222A 10%, #3A6073 90%);
-  height: 100vh;
+  height: 100vh; }
+
+body {
   text-align: center; }
 
 main {
@@ -14,9 +16,11 @@ a {
   text-decoration: none; }
 
 footer {
+  bottom: 0;
   color: rgba(0, 0, 0, 0.2);
   margin-bottom: .8em;
-  margin-top: 5em; }
+  margin-top: 5em;
+  position: relative; }
 
 h3 {
   color: white;

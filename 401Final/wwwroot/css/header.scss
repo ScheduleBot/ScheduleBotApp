@@ -3,7 +3,7 @@
 header {
     background-color: $Gray;
     padding: $Font-Size/2;
-    position:relative;
+    position: relative;
     text-align: left;
 
     div:not(:last-child) {
@@ -44,7 +44,7 @@ header {
                     padding-right: 28vw;
                     padding-top: .25em;
                     transition: all .2s linear 0s;
-                    width: 22vw;
+                    width: 30vw;
 
                     &:hover {
                         background: linear-gradient(90deg, $White 10%, transparent);
@@ -55,16 +55,23 @@ header {
             }
         }
     }
-    .AccountDiv {
-        display: none;
-        position: absolute;
-        right: 1em;
-        top: 20em;
-        color: $White;
 
-            font-size: 1em;
-            text-decoration: none;
-     
+    #AccountDiv > p {
+        position: absolute;
+        bottom: 7em;
+        right: 4em;
+        color: $White;
+        font-size: 1em;
+        text-decoration: none;
+    }
+
+    #AccountDiv > a {
+        position: absolute;
+        bottom: 5em;
+        right: 4em;
+        color: $White;
+        font-size: 1em;
+        text-decoration: none;
     }
 }
 

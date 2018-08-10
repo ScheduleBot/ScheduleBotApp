@@ -37,14 +37,15 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="Notes">Custom Notes</a></li>
             </ul>
         </nav>
-        <div class="AccountDiv">
+        <div id="AccountDiv">
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="AccountDiv" asp-controller="Account" asp-action="Logout">Log Out</a>
+                <p>@User.Claims.First(c => c.Type == ClaimTypes.Email).Value</p>
+                <a  asp-controller="Account" asp-action="Logout">Log Out</a>
             }
             else
             {
-                <a class="AccountDiv" asp-controller="Account" asp-action="Login">Log In</a>
+                <a  asp-controller="Account" asp-action="Login">Log In</a>
             }
         </div>
 

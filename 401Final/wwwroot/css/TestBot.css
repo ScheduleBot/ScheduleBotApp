@@ -14,9 +14,11 @@ a {
   text-decoration: none; }
 
 footer {
+  bottom: 0;
   color: rgba(0, 0, 0, 0.2);
   margin-bottom: .8em;
-  margin-top: 5em; }
+  margin-top: 5em;
+  position: relative; }
 
 main {
   padding-bottom: 6em;

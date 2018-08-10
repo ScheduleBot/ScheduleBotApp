@@ -1,9 +1,11 @@
 ﻿* {
   box-sizing: border-box; }
 
-body {
+html {
   background: linear-gradient(90deg, #16222A 10%, #3A6073 90%);
-  height: 100vh;
+  height: 100vh; }
+
+body {
   text-align: center; }
 
 main {
@@ -14,9 +16,11 @@ a {
   text-decoration: none; }
 
 footer {
+  bottom: 0;
   color: rgba(0, 0, 0, 0.2);
   margin-bottom: .8em;
-  margin-top: 5em; }
+  margin-top: 5em;
+  position: relative; }
 
 header {
   background-color: rgba(0, 0, 0, 0.2);
@@ -52,16 +56,22 @@ header {
           padding-right: 28vw;
           padding-top: .25em;
           transition: all .2s linear 0s;
-          width: 22vw; }
+          width: 30vw; }
           header nav ul li a:hover {
             background: linear-gradient(90deg, white 10%, transparent);
             color: black;
             cursor: pointer; }
-  header .AccountDiv {
-    display: none;
+  header #AccountDiv > p {
     position: absolute;
-    right: 1em;
-    top: 20em;
+    bottom: 7em;
+    right: 4em;
+    color: white;
+    font-size: 1em;
+    text-decoration: none; }
+  header #AccountDiv > a {
+    position: absolute;
+    bottom: 5em;
+    right: 4em;
     color: white;
     font-size: 1em;
     text-decoration: none; }
