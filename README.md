@@ -3,8 +3,9 @@ ScheduleBot uses Azure Bot Services to provide a natural language interface for 
 ScheduleBot allows users to quickly request and subsequently display future tasks and events from the database. 
 Our vision is to make navigating our oftentimes hectic everyday lives as painless as possible.  
 
-##Technical Requirements
-[Requirements Document](/Requirements.md)
+## Technical Requirements
+
+![Requirements Document](/Requirements.md)
 
 ## Wireframes
 ![Wireframe](/AllWireFrames.PNG)
