@@ -3,8 +3,9 @@ ScheduleBot uses Azure Bot Services to provide a natural language interface for 
 ScheduleBot allows users to quickly request and subsequently display future tasks and events from the database. 
 Our vision is to make navigating our oftentimes hectic everyday lives as painless as possible.  
 
-##Technical Requirements
-[Requirements Document](/Requirements.md)
+## Technical Requirements
+
+[Requirements Document](https://github.com/ScheduleBot/ScheduleBotApp/blob/bot-name-fix/requirements.md)
 
 ## Wireframes
 ![Wireframe](/AllWireFrames.PNG)
@@ -19,27 +20,27 @@ The front-end Admin site is located at the url: https://schedulingbot.azurewebsi
 
 ## How to Use: Landing Page
 
-![Landing Page](./Assets/LandingPage.jpg)
+![Landing Page](./Assets/LogIn.PNG)
 
 The front-end site for this app is designed to be used by administrators. The bot itself is deployed separately, but from the admin site CRUD functionality has been enabled in notes, and the bot chat commands can be tested, as well as options to embed the bot in different sites it is registered for. When a user arrives at the site, they are immediately redirected to the login page. Right now anyone who registers is granted admin access, the goal for the future is to implement policy restrictions so that only admins are allowed access to the site, and must register via OAUTH. The landing page is to login, or choose another option in the nav bar.
 
 ## How to Use: Bot Chat Page
 
-![Test Chat Page](./Assets/TestBotPage.jpg)
+![Test Chat Page](./Assets/WebChat.PNG)
 
 The bot testing page features an embedded web chat iframe window. This allows the user to type into it directly. The list of available commands and embed links are on the page as well. Here, the user can test out the current bot functionality, then use one of the buttons to add it to a Skype or Webchat channel. There are more options available, the bot is currently registered at those two.
 
 ## How to Use: Recent Activity Page
 
-![Recent Activity Page](./Assets/RecentActivityPage.jpg)
+![Recent Activity Page](./Assets/RecentActivity.PNG)
 
 The recent activity page displays the latest interactions of the bot. When a message is sent from slack with the bot mentioned, it sends a post to our site internal API. This tracks the UTC date-time stamp and the message that was sent, and stores it in the database. UTC is used as the time due to geographic locations of where the bot could be embedded. For an admin, this information is most useful using Universal Time, which allows all the interactions to be filtered by when they occured, regardless of geographical location.
 
 ## How to Use: Notes Page
 
-![Notes Page](./Assets/ViewNotePage.jpg)
+![Notes Page](./Assets/Notes.PNG)
 
-![Write a note](./Assets/AddNewNote.jpg)
+![Write a note](./Assets/AddNote.PNG)
 
 The notes page allows the user to input a personal note. While the bot receives its primary schedule from the Canvas API, our internal API allows an admin user to create additional notes. In the future, these notes would coincide with a particular class or Slack group. For now they are all stored as part of the same schedule item. This allows the additional commands in chat to retrieve notes in addition to canvas items. The result is that a class using Slack can also have notes particular to the class that are independent of the official schedule. 
 
@@ -56,3 +57,6 @@ Available commands(web chat):
 @schedule note day: gets the note from our internal API
 @schedule note week: gets a week of notes from our internal API
 
+## Licensing
+
+This project is licensed and available via MIT license.
