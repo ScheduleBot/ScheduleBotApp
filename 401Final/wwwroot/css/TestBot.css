@@ -1,9 +1,11 @@
 ﻿* {
   box-sizing: border-box; }
 
-body {
+html {
   background: linear-gradient(90deg, #16222A 10%, #3A6073 90%);
-  height: 100vh;
+  height: 100vh; }
+
+body {
   text-align: center; }
 
 main {
