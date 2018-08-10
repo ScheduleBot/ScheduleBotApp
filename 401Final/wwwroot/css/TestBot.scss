@@ -1,0 +1,32 @@
+﻿@import'_themes';
+
+main {
+    padding-bottom: 6em;
+
+    div {
+        background-color: $White;
+        h3 {
+            color: $White;
+            font-size: 3em;
+            margin-top: .5em;
+        }
+
+        p {
+            color: $White;
+            padding-top: 1em;
+        }
+
+        iframe {
+            background-color: $White;
+            border: 5px solid $Gray;
+            border-radius: 5px;
+            height: 100vh;
+            margin-top: 1em;
+            width: 50vw;
+        }
+
+        img {
+            height: 5vh;
+        }
+    }
+}

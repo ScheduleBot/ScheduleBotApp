@@ -1,0 +1,27 @@
+﻿* {
+  box-sizing: border-box; }
+
+body {
+  background: linear-gradient(90deg, #16222A 10%, #3A6073 90%);
+  height: 100vh;
+  text-align: center; }
+
+main {
+  margin-top: 2em;
+  text-align: center; }
+
+a {
+  text-decoration: none; }
+
+footer {
+  margin-top: 5em; }
+
+#AccountDiv {
+  position: absolute;
+  right: 1em;
+  top: 20vh; }
+  #AccountDiv p, #AccountDiv a {
+    color: white;
+    font-size: 1em;
+    text-decoration: none; }
+
