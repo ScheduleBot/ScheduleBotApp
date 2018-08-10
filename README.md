@@ -40,7 +40,7 @@ The recent activity page displays the latest interactions of the bot. When a mes
 
 ![Notes Page](./Assets/Notes.PNG)
 
-![Write a note](./Assets/AddNewNote.jpg)
+![Write a note](./Assets/AddNote.PNG)
 
 The notes page allows the user to input a personal note. While the bot receives its primary schedule from the Canvas API, our internal API allows an admin user to create additional notes. In the future, these notes would coincide with a particular class or Slack group. For now they are all stored as part of the same schedule item. This allows the additional commands in chat to retrieve notes in addition to canvas items. The result is that a class using Slack can also have notes particular to the class that are independent of the official schedule. 
 
