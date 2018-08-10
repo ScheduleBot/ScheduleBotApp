@@ -55,13 +55,17 @@ namespace Final401.Controllers
         }
 
         /// <summary>
-        /// this doesn't currently do anything. Do we really need it?
+        /// Display the custom notes page
         /// </summary>
         /// <returns>View ith ViewData</returns>
         public IActionResult Notes()
         {
 
-            List<ScheduleItem> items = _context.ScheduleItems.Where(x => x.ScheduleID == 1).ToList();
+            List<ScheduleItem> items = _context.ScheduleItems
+                .Where(x => x.ScheduleID == 1)
+                .OrderBy(y => y.StartTime)
+                .ToList();
+
 
             ViewData["Message"] = "This will display the Notes for the specified class.";
 
