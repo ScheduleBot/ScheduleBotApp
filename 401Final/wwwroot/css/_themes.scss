@@ -33,16 +33,8 @@ a{
 }
 
 footer{
+    color: $Gray;
+    margin-bottom: .8em;
     margin-top: 5em;
 }
-#AccountDiv {
-    position: absolute;
-    right: 1em;
-    top: 20vh;
 
-    a{
-        color: $White;
-        font-size: 1em;
-        text-decoration: none;
-    }
-}

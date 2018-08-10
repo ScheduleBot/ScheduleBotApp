@@ -2,9 +2,8 @@
 
 main {
     padding-bottom: 6em;
-
-    div {
-        background-color: $White;
+    font-family: $Font;
+ 
         h3 {
             color: $White;
             font-size: 3em;
@@ -16,17 +15,22 @@ main {
             padding-top: 1em;
         }
 
+        #Frame{
+            overflow: hidden;
+            margin-left: 20vw;
+            margin-right: 20vw;
+        }
+
         iframe {
-            background-color: $White;
+            background-color: white;
             border: 5px solid $Gray;
             border-radius: 5px;
-            height: 100vh;
+            height: 80vh;
             margin-top: 1em;
-            width: 50vw;
+            width: 55vw;
         }
 
         img {
             height: 5vh;
         }
     }
-}

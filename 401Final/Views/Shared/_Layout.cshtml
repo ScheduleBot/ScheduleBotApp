@@ -37,14 +37,14 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="Notes">Custom Notes</a></li>
             </ul>
         </nav>
-        <div id="AccountDiv">
+        <div class="AccountDiv">
             @if (SignInManager.IsSignedIn(User))
             {
-                <a  asp-controller="Account" asp-action="Logout">Log Out</a>
+                <a class="AccountDiv" asp-controller="Account" asp-action="Logout">Log Out</a>
             }
             else
             {
-                <a asp-controller="Account" asp-action="Login">Log In</a>
+                <a class="AccountDiv" asp-controller="Account" asp-action="Login">Log In</a>
             }
         </div>
 

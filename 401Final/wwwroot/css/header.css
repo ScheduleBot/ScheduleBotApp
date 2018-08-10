@@ -14,22 +14,25 @@ a {
   text-decoration: none; }
 
 footer {
+  color: rgba(0, 0, 0, 0.2);
+  margin-bottom: .8em;
   margin-top: 5em; }
 
 header {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 1.5em;
+  position: relative;
   text-align: left; }
-  header div {
+  header div:not(:last-child) {
     text-align: center; }
-    header div a {
+    header div:not(:last-child) a {
       text-shadow: 1px 1px 2px black, 0 0 0.2em black, 0 0 0.2em rgba(0, 0, 0, 0.2);
       color: white;
       display: inline-block;
       font-family: "Raleway", sans-serif;
       font-size: 4em;
       transition: .3s ease; }
-      header div a:hover {
+      header div:not(:last-child) a:hover {
         cursor: pointer;
         text-shadow: 1px 1px 2px black, 0 0 .2em white, 0 0 0.2em black; }
   header nav {
@@ -54,7 +57,12 @@ header {
             background: linear-gradient(90deg, white 10%, transparent);
             color: black;
             cursor: pointer; }
-
-body {
-  background: linear-gradient(90deg, #16222A 10%, #3A6073 90%); }
+  header .AccountDiv {
+    display: none;
+    position: absolute;
+    right: 1em;
+    top: 20em;
+    color: white;
+    font-size: 1em;
+    text-decoration: none; }
 

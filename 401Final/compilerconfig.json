@@ -1,18 +1,17 @@
-﻿[
+[
   {
     "outputFile": "wwwroot/css/header.css",
-    "inputFile": "wwwroot/css/header.scss"
+    "inputFile": "wwwroot/css/header.scss",
+    "sourceMap": false
   },
   {
     "outputFile": "wwwroot/css/Login.css",
-    "inputFile": "wwwroot/css/Login.scss"
+    "inputFile": "wwwroot/css/Login.scss",
+    "sourceMap": false
   },
   {
     "outputFile": "wwwroot/css/TestBot.css",
-    "inputFile": "wwwroot/css/TestBot.scss"
-  },
-  {
-    "outputFile": "wwwroot/css/_themes.css",
-    "inputFile": "wwwroot/css/_themes.scss"
+    "inputFile": "wwwroot/css/TestBot.scss",
+    "sourceMap": false
   }
 ]

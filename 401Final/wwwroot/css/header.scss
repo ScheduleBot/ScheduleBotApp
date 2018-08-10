@@ -3,9 +3,10 @@
 header {
     background-color: $Gray;
     padding: $Font-Size/2;
+    position:relative;
     text-align: left;
 
-    div {
+    div:not(:last-child) {
         text-align: center;
 
         a {
@@ -54,8 +55,17 @@ header {
             }
         }
     }
+    .AccountDiv {
+        display: none;
+        position: absolute;
+        right: 1em;
+        top: 20em;
+        color: $White;
+
+            font-size: 1em;
+            text-decoration: none;
+     
+    }
 }
 
-body{
-    background: $Background;
-}
+
