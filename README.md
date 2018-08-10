@@ -5,7 +5,7 @@ Our vision is to make navigating our oftentimes hectic everyday lives as painles
 
 ## Technical Requirements
 
-![Requirements Document](/Requirements.md)
+[Requirements Document](https://github.com/ScheduleBot/ScheduleBotApp/blob/bot-name-fix/requirements.md)
 
 ## Wireframes
 ![Wireframe](/AllWireFrames.PNG)
