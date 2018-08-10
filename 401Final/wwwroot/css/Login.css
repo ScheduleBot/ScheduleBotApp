@@ -24,7 +24,7 @@ footer {
 
 h3 {
   color: white;
-  font-size: 1.5em;
+  font-size: 0.125em;
   padding: 1em;
   text-shadow: 1px 0px px rgba(0, 0, 0, 0.2); }
 
@@ -40,7 +40,7 @@ form {
     margin: .5em;
     padding: .25em; }
   form button {
-    background: Navy;
+    background: #3874a4;
     border: 2px groove lightgray;
     border-radius: 5px;
     color: white;
@@ -49,7 +49,7 @@ form {
     padding: .3em;
     width: 50%; }
     form button:hover {
-      background: Yellow;
-      color: Navy;
+      background: #ebb154;
+      color: #3874a4;
       cursor: pointer; }
 
