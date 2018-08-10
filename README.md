@@ -50,9 +50,9 @@ The notes page allows the user to input a personal note. While the bot receives 
 The schedule bot is deployed on Azure, and registered as a workspace bot for slack. It functions through the creation of a bot user in the Slack API. The slack bot functionality is then linked to our Schedule Bot through Slack Tokens on Azure services. This allows the bot to have both bot functionality available to Slack bots, in addition to the base functionality of our bot. When a bot command is executed, it retrieves the information from Canvas API or our site internal API for notes. A time stamp for the request is generated, and the information retrieved is relative to the time requested. For example, if a user asks for the week schedule on a Monday, it will receive the schedule for the next week starting Monday. If the request is made on a Wednesday, it will receive a week of assignments starting Wednesday. This ensures that no past due assignments show up when a user is requesting to know upcoming due dates. With each request or bot mention, a post is sent to our internal API endpoint API/ChatLog/New, which stores the request or conversation snippet in the bot activity database table.
 
 Available commands(web chat):
-@bot202 canvas day: gets the day schedule from Canvas API
-@bot202 canvas week: gets the week schedule from Canvas API
-@bot202 canvas upcoming: gets the next 3 days from Canvas API
-@bot202 note day: gets the note from our internal API
-@bot202 note week: gets a week of notes from our internal API
+@schedule canvas day: gets the day schedule from Canvas API
+@schedule canvas week: gets the week schedule from Canvas API
+@schedule canvas upcoming: gets the next 3 days from Canvas API
+@schedule note day: gets the note from our internal API
+@schedule note week: gets a week of notes from our internal API
 
