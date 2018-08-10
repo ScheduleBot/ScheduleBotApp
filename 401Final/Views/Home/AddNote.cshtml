@@ -1,0 +1,28 @@
+﻿@model Final401.Models.ScheduleItem
+
+@*public int ID { get; set; }
+    public int ScheduleID { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime StartTime { get; set; }
+    public TimeSpan Length { get; set; }
+    public DayFlags Days { get; set; } = 0;*@
+
+<form method="post" asp-controller="Home" asp-action="AddNewNote">
+    
+    <label asp-for="StartTime">Start Time</label>
+    <input asp-for="StartTime" type="datetime-local">
+
+    <label asp-for="Description">Details</label>
+    <input asp-for="Description" type="text">
+
+
+    @*hidden fields not utilized but available for scaling*@
+    <input asp-for="ScheduleID" type="hidden" value="1">
+    <input asp-for="Title" type="hidden">
+    <input asp-for="Length" type="hidden">
+    <input asp-for="Days" type="hidden">
+
+    <button type="submit">Add Note</button>
+
+</form>

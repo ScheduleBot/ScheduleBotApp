@@ -1,0 +1,61 @@
+﻿@import '_themes';
+
+header {
+    background-color: $Gray;
+    padding: $Font-Size/2;
+    text-align: left;
+
+    div {
+        text-align: center;
+
+        a {
+            text-shadow: 1px 1px 2px black, 0 0 .2em black, 0 0 0.2em $Gray;
+            color: $White;
+            display: inline-block;
+            font-family: $Font;
+            font-size: $Font-Size +1;
+            transition: .3s ease;
+
+            &:hover {
+                cursor: pointer;
+                text-shadow: 1px 1px 2px black, 0 0 .2em white, 0 0 0.2em black;
+            }
+        }
+    }
+
+    nav {
+        text-align: left;
+
+        ul {
+            width: 45vw;
+
+            li {
+                margin: .5em;
+                padding: .25em;
+
+                a {
+                    background: linear-gradient(90deg, $Gray 10%, transparent);
+                    color: $White;
+                    font-family: $Font;
+                    font-size: 1.5em;
+                    padding-bottom: .25em;
+                    padding-left: 2vw;
+                    padding-right: 28vw;
+                    padding-top: .25em;
+                    transition: all .2s linear 0s;
+                    width: 22vw;
+
+                    &:hover {
+                        background: linear-gradient(90deg, $White 10%, transparent);
+                        color: $Black;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+body{
+    background: $Background;
+}
