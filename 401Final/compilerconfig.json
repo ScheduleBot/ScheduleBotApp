@@ -6,5 +6,13 @@
   {
     "outputFile": "wwwroot/css/Login.css",
     "inputFile": "wwwroot/css/Login.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/TestBot.css",
+    "inputFile": "wwwroot/css/TestBot.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_themes.css",
+    "inputFile": "wwwroot/css/_themes.scss"
   }
 ]

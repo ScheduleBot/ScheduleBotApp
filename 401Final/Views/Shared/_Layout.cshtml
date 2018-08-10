@@ -28,7 +28,7 @@
 <body id="loginView">
     <header>
         <div>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Sassy Schedule Bot</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Schedule Bot</a>
         </div>
         <nav>
             <ul>
@@ -37,6 +37,17 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="Notes">Custom Notes</a></li>
             </ul>
         </nav>
+        <div id="AccountDiv">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a  asp-controller="Account" asp-action="Logout">Log Out</a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login">Log In</a>
+            }
+        </div>
+
     </header>
 
     <main>
