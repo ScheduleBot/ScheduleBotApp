@@ -17,20 +17,26 @@ namespace ScheduleAPITests
         [Fact]
         public void CanPostChatLog()
         {
+            //arrange
             ScheduleDBContext context = MakeContext("ChatLogTest");
+
             ChatLog newLog = new ChatLog
             {
                 TimeStamp = DateTime.Now,
                 Chat = "This test string."
             };
 
+            //act
             context.Add(newLog);
             context.SaveChanges();
 
             var testResult = from x in context.ChatLogs
                              select x;
 
+            //assert
             Assert.NotNull(testResult);
+
+            //reset
             ResetContext(context);
         }
 
@@ -40,20 +46,26 @@ namespace ScheduleAPITests
         [Fact]
         public void CanInsertMalware()
         {
-            ScheduleDBContext context = MakeContext("ChatLogTest");
+            //arrange
+            ScheduleDBContext context = MakeContext("ChatLogTest2");
+
             ChatLog newLog = new ChatLog
             {
                 TimeStamp = DateTime.Now,
                 Chat = "{'chat': '{insert json malware here}'}"
             };
 
+            //act
             context.Add(newLog);
             context.SaveChanges();
 
             var testResult = from x in context.ChatLogs
                              select x;
 
+            //assert
             Assert.NotNull(testResult);
+
+            //reset
             ResetContext(context);
         }
 
